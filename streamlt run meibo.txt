@@ -1,0 +1,7 @@
+C:\Users\kmuto\AppData\Local\Programs\Python\Python313\App
+
+C:\Users\kmuto\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\Local-Packages\Python313\Scripts
+
+
+
+streamlit run meibo.py

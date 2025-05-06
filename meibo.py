@@ -12,7 +12,14 @@ def to_half_width(s):
 st.title("名簿検索システム")
 
 # CSVファイルの読み込み
+
+import os
+import pandas as pd
+
 df = pd.read_csv('meibo.csv', encoding='utf-8')
+print(df.columns)
+
+
 
 # 必要に応じて、期列を文字列型に変換
 df['期'] = df['期'].astype(str)
@@ -36,7 +43,7 @@ if ki or name :
     ]
 
     # 結果を限定した列のみ表示
-    selected_columns = ['期', '名前', 'メアド１','電話番号','プロフィール']  # 必要な列を選択
+    selected_columns = ['期', '名前','電話番号','学部学科']  # 必要な列を選択
     if not filtered_df.empty:
         if all(col in df.columns for col in selected_columns):  # 必要な列が存在するか確認
             st.subheader("検索結果")

@@ -30,18 +30,19 @@ ki = st.sidebar.text_input("期", "").strip()
 name = st.sidebar.text_input("名前", "").strip()
 
 
-# 全データ表示オプション
-# if st.sidebar.checkbox("全データを表示"):
-#     st.subheader("名簿全データ")
-#     st.dataframe(df)
-
 # フィルタリング処理（部分一致対応 & 結果を限定表示）
-if ki or name:
-    filtered_df = df[
-        ((df['期'] == ki) if ki else True) &  # 「期」は完全一致に変更
-        ((df['名前'].str.contains(name, na=False, case=False)) if name else True)
-    ]
+# 'ki'カラムを数値型へ変換
+df["ki"] = pd.to_numeric(df["ki"], errors='coerce')
 
+# ユーザー入力
+search_value = st.text_input("検索する番号を入力")
+
+if search_value.isdigit():
+    search_value = int(search_value)
+    result = df[df["ki"] == search_value]
+    st.write(result)
+else:
+    st.write("数字のみ入力してください")
 
     # 結果を限定した列のみ表示
     selected_columns = ['期', '名前','学部学科']  # 必要な列を選択
@@ -55,3 +56,6 @@ if ki or name:
         st.warning("該当するデータがありません。")
 else:
     st.info("検索条件を入力してください。")
+
+
+
